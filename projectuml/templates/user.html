@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'list.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav id="sidebar">
+        <div>
+            <ul>
+                <li>
+                    <div class="logo">
+                        <img src="{% static 'airlogo.png' %}" alt="logo">
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a>Dashboard</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#">Flights</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#">Planes</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div>
+            <h1>Users</h1>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>first_name</th>
+                        <th>last_name</th>
+                        <th>email</th>
+                        <th>date_joined</th>
+                    </tr>
+                </thead>
+                {% for x in queryset %}
+                <tbody>
+                    <tr>
+                        <td>{{ x.id}}</td>
+                        <td>{{x.first_name}}</td>
+                        <td>{{x.last_name}}</td>
+                        <td>{{ x.email }}</td>
+                        <td>{{ x.date_joined }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        
+    </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-5 mb-5" style="display:flex ;align-items:center; justify-content:center;min-height: 100vh;">
+        
+        <div class="row" style="width: 80%;border-radius: 15px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <div class="col-md-6 bg-black" style="border-radius:15px 0px 0px 15px;background-image: url({% static 'images/background.jpg' %}); background-position: center center; background-size:cover;">
+                <button class="btn text-white m-4 p-0"><i style="font-size: 40px;" ></i></button>
+            <br>
+            <br>
+            <br>
+            </div>
+        
+            <div class="col-md-6 p-5 ">
+                <div class="w-75" style="margin: auto;">
+                    <h1 style="text-align: center; ">Sign-In</h1>
+                    <br>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div id="form_errors">
+                                    {% for key, value in form.errors.items %}
+                                        <strong>{{ value }}</strong>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="">Nom</label>
+                                {{ form.first_name }}
+
+                            </div>
+                            <div class="col-6">
+                                <label for="">Prenom</label>
+                                {{ form.last_name }}
+
+                            </div>
+                        </div>
+                        <br>
+                        <label for="">Email</label>
+                        {{ form.email }}
+
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                        <label for="">Mot de passe</label>
+                        {{ form.password1 }}
+                    </div>
+                            <div class="col-6">
+                        <label for="">Confirmation</label>
+                        {{ form.password2 }}
+                    </div>
+
+                        <button class="btn w-100 text-white mt-5" style="background-color: rgb(124, 55, 39); font-weight:bold;" type="submit">Continue</button>
+                    </form>
+                    <hr>
+                    <p> Vous avez deja un compte ?<a href="{% url 'login' %}"> Connectez vous !</a></p>
+                </div>
+            </div> 
+        </div> 
+    </div> 
+    
+</body>
+</html>

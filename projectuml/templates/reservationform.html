@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reservationform.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+
+
+    <title>Your Website Title</title>
+    <script>
+        function updateCategorieOptions() {
+            // Assuming you have a URL endpoint to fetch 'Categorie' options
+            var categorieUrl = 'your_api_url_here'; // Replace with your actual API endpoint
+        
+            // Fetch data from the server
+            fetch(categorieUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Get the dropdown element
+                    const categorieSelect = document.getElementById('categorieSelect');
+    
+                    // Clear existing options
+                    categorieSelect.innerHTML = '';
+    
+                    // Add new options based on fetched data
+                    data.forEach(cat => {
+                        const option = document.createElement('option');
+                        option.value = cat.id;
+                        option.textContent = cat.type;
+                        categorieSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    
+        // Call the function to initially load 'Categorie' options
+        updateCategorieOptions();
+    
+            
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'images/airlogo.png' %}" alt="Company Logo">
+        </div>
+        <ul>
+            <li><a href="{% url 'acceuil' %}">Home</a></li>
+            <li><a href="{% url 'rechercher' %}">Rechercher</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Log In</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+    <img src="{% static 'images/background.jpg' %}" alt="hh" class="background-image">
+    <br/>
+    <br/>
+    
+    <div id="form-container">
+        <form method="post" action="{% url 'reservationform' %}">
+            {% csrf_token %}
+            
+            <!-- Input for the number of forms -->
+            <label for="num-forms">Number of Forms:</label>
+            <input type="number" id="num-forms" name="num_forms" min="1" value="1">
+
+            <!-- Container for dynamic form fields -->
+            <div id="passenger-formset">
+                {% with num_forms|add:'0' as num_forms_range %}
+                    {% for i in num_forms_range %}
+                        <div class="form-container">
+                            <label for="id_passager-{{ i }}-nom">Nom:</label>
+                            <input type="text" name="passager-{{ i }}-nom" required>
+                            
+                            <label for="id_passager-{{ i }}-prenom">Prenom:</label>
+                            <input type="text" name="passager-{{ i }}-prenom" required>
+                            
+                            <label for="id_passager-{{ i }}-categorie">Categorie:</label>
+                            <select name="passager-{{ i }}-categorie" >
+                                <!-- Include options for the categories -->
+                            </select>
+                            
+                            <label for="id_passager-{{ i }}-dateN">Date de Naissance:</label>
+                            <input type="date" name="passager-{{ i }}-dateN" required>
+                        </div>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+            
+            <!-- Submit button -->
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#num-forms').on('input', function () {
+                var numForms = $(this).val();
+                var formContainer = $('#passenger-formset');
+        
+                // Clear existing form fields
+                formContainer.empty();
+        
+                // Create form fields based on the user's input
+                for (var i = 0; i < numForms; i++) {
+                    // Use vanilla JavaScript to create form elements
+                    var formHtml = '<div class="form-container">' +
+                        '<label for="id_passager-' + i + '-nom">Nom:</label>' +
+                        '<input type="text" name="passager-' + i + '-nom" required>' +
+                        '<label for="id_passager-' + i + '-prenom">Prenom:</label>' +
+                        '<input type="text" name="passager-' + i + '-prenom" required>' +
+                        '<label for="id_passager-' + i + '-categorie">Categorie:</label>' +
+                        '<select name="passager-' + i + '-categorie" >' +
+                        '{% for category in categories %}' +  <!-- Assuming you pass the categories from the server -->
+                        '<option value="{{ category.id }}">{{ category.type }}</option>' +
+                        '{% endfor %}' +
+                        '<label for="id_passager-' + i + '-dateN">Date de Naissance:</label>' +
+                        '<input type="date" name="passager-' + i + '-dateN" required>' +
+                        '</div>';
+        
+                    formContainer.append(formHtml);
+                }
+            });
+        });
+    
+              
+               
+    </script>
+</body>
+</html>

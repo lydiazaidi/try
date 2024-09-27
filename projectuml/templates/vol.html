@@ -1,0 +1,105 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'list.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="acceuil.css">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+       
+        <nav id="sidebar" class="col-md-2 d-md-block sidebar vh-100" style="background-color:rgb(2, 2, 35);height:100% ">
+            
+            <div class="position-sticky">
+                <ul class="nav flex-column" >
+                    <li class="nav-item">
+                        <div class="logo">
+                        <img src="airlogo.png" alt="logo">
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <br/><br/><br/><br/><br/><br/>
+                        <a class="nav-link active" href="#" style="color:white ; font-weight:bolder">
+                            Dashboard
+                        </a>
+                    </li>
+                    <br/><br/><br/>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color:white;  font-weight:bolder">
+                            Flights
+                        </a>
+                    </li>
+                    <br/><br/><br/>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color:white;  font-weight:bolder">
+                            planes 
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+        
+        <main class="col-md-10 px-md-4">
+            
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Flights</h1>
+                <a href="{% url 'ajouter_vol' %}"><button class="btn btn-success">Add Flight</button>
+            </div>
+
+            
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Departure</th>
+                            <th>Destination</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>img</th>
+                            <th>num_avion</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for x in queryset %}
+                        <tbody>
+                        <tr>
+                            <td>{{ x.num_vol }}</td>
+                            <td>{{ x.trajet.villeD.nom }}</td>
+                            <td>{{ x.trajet.villeA.nom }}</td>
+                            <td>{{ x.datetimeD }}</td>
+                            
+                            <td>{{x.img}}</th>
+                                <td>                
+                                    <ul>
+                                        {% for avionvol in x.avionvol_set.all %}
+                                            <li>{{ avionvol.num_avion }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            <td>
+                                <a href="{% url 'vol_update' pk=x.pk %}"><button class="btn btn-primary btn-sm">Update</button>
+                                    <a href="{% url 'delete_vol' pk=x.pk %}"><button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                       
+                    </tbody>
+                    {% endfor%}
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

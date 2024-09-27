@@ -1,0 +1,52 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <title>Create Object</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Create Object</h2>
+        <form method="post" action="{% url 'ajouter_vol' %}">
+            {% csrf_token %}
+
+            <!-- Use Django form fields and add classes for styling -->
+            <div class="form-field">
+                {{ form.num_vol.label_tag }}
+                {{ form.num_vol }}
+            </div>
+
+            <div class="form-field">
+                {{ form.trajet.label_tag }}
+                {{ form.trajet }}
+            </div>
+
+            <div class="form-field">
+                {{ form.dateD.label_tag }}
+                {{ form.dateD }}
+            </div>
+            <div class="form-field">
+                {{ form.timeD.label_tag }}
+                {{ form.timeD }}
+            </div>
+            <div class="form-field">
+                {{ form.img.label_tag }}
+                {{ form.img }}
+            </div>
+            <div class="form-field">
+                {{ form.num_avion.label_tag }}
+                {{ form.num_avion}}
+            </div>
+
+         
+
+            <!-- Add other form fields as needed -->
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</body>
+</html>

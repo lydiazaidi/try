@@ -1,0 +1,50 @@
+/* Add these styles to your delete.css file */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.delete-popup {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.delete-popup h2 {
+    color: #333;
+}
+
+.delete-popup p {
+    margin-bottom: 20px;
+}
+
+.delete-popup button,
+.delete-popup a.cancel-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.delete-popup button {
+    background-color: #e74c3c; /* Red color for delete */
+}
+
+.delete-popup button:hover,
+.delete-popup a.cancel-link:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}

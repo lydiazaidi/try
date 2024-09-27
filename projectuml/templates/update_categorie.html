@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Object</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/update.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Object</h2>
+        <form method="post" action="{% url 'update_categorie' pk=instance.pk %}">
+            {% csrf_token %}
+
+            <!-- Use Django form fields and add classes for styling -->
+            <div class="form-field">
+                {{ form.id_categorie.label_tag }}
+                {{ form.id_categorie }}
+            </div>
+
+            <div class="form-field">
+                {{ form.type.label_tag }}
+                {{ form.type }}
+            </div>
+
+            <div class="form-field">
+                {{ form.prix.label_tag }}
+                {{ form.prix }}
+            </div>
+
+            <!-- Add other form fields as needed -->
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+/* reservationform.css */
+
+#form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+    
+
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 15px; /* Adjust padding as needed */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 42%; /* Adjust the width as needed */
+    box-sizing: border-box;
+}
+
+.form-container .form-item {
+    margin-bottom: 15px; /* Adjust margin as needed */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+input,
+select {
+    width: calc(100% - 16px); /* Adjust width as needed */
+    padding: 10px; /* Adjust padding as needed */
+    box-sizing: border-box;
+    border:0px ;
+    border-bottom: 1px solid #71200a;
+    border-radius: 4px;
+    margin-bottom: 8px; /* Adjust margin as needed */
+    font-size: 15px; /* Adjust font size as needed */
+}
+input:hover{
+    border: 1px solid #71200a;
+}
+
+
+
+
+
+
+
+
+
+

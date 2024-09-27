@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav id="sidebar">
+        <div class="logo">
+            
+        </div>
+        <ul>
+            <li>
+                <div class="logo">
+                    <img src="{% static 'images/airlogo.png' %}" alt="logo">
+                </div>
+            </li>
+            <br/><br/>
+            <li class="nav-item">
+                <a>Dashboard</a>
+            </li>
+            <br/><br/>
+            <li class="nav-item">
+                <a href="#">Flights</a>
+            </li>
+            <br/><br/>
+            <li class="nav-item">
+                <a href="#">Planes</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'class' %}">classes</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="header">
+            <h1>Avion</h1>
+            <div class="action-buttons">
+                <a href="{% url 'ajouter_view' %}"><button class="btn btn-success">Add Flight</button></a>
+            </div>
+        </div>
+
+        <div class="content">
+            <table class="table table-striped">
+                
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        
+                        
+                        <th>Autonomie</th>
+                        <th>Moteur</th>
+             
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                {% for x in queryset %}
+                <tbody>
+                    <tr>
+                        <td>{{ x.num_avion }}</td>
+                       
+                        
+                        <td>{{ x.autonomie }}</td>
+                        <td>{{ x.moteur }}</td>
+                        
+                        <td>
+                            <a href="{% url 'update_view' pk=x.num_avion %}"><button class="btn btn-primary">Update</button></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal{{ x.pk }}" class="btn btn-danger">Delete</a>
+
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+                <div class="modal fade" id="deleteModal{{ x.pk }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this item?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="{% url 'delete_view' pk=x.num_avion %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor %}
+            
+            </table>
+
+        </div>
+    </main>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

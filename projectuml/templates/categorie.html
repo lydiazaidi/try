@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav id="sidebar">
+        <div>
+            <ul>
+                <li>
+                    <div class="logo">
+                        <img src="{% static 'images/airlogo.png' %}" alt="logo">
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a>Dashboard</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#">Flights</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#">Planes</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main  style="margin-top:40px">
+        <div class="header">
+            <h1 style="font-weight:bold">Categories</h1>
+            <div class="header">
+            <a href="{% url 'ajouter_categorie' %}"><button class="btn btn-success" style="margin-top:20px">Add Categorie</button></a>
+            </div>
+        </div>
+
+        <div class="content">
+            <table class="table table-striped" style="margin-top:20px; ">
+                <thead>
+                    <tr>
+                        <th style=" padding: 8px; text-align: left; width: 150px;">ID</th>
+                        <th style=" padding: 8px; text-align: left; width: 150px;">Type</th>
+                        <th style=" padding: 8px; text-align: left; width: 150px;">price</th>
+                        <th colspan="2" style=" padding: 8px; text-align: left; width: 200px;">Action</th>
+                    </tr>
+                </thead>
+                {% for x in queryset %}
+                <tbody>
+                    <tr>
+                        <td style=" padding: 8px; text-align: left; width: 150px;">{{ x.id_categorie}}</td>
+                        <td style=" padding: 8px; text-align: left; width: 150px;">{{ x.type }}</td>
+                        <td style=" padding: 8px; text-align: left; width: 150px;">{{ x.prix}}</td>
+                        <td>
+                            <a href="{% url 'update_categorie' x.pk %}"><button class="btn btn-primary">Update</button></a>
+                            <a href="{% url 'delete_categorie' pk=x.pk %}"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        
+    </main>
+</div>
+
+</body>
+</html>

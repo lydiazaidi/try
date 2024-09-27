@@ -1,0 +1,193 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="acceuil.css">
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
+    <title>Admin Panel</title>
+    <style>
+  
+
+        
+
+        .dashboard-header {
+            background-color: rgb(2, 2, 35);
+            padding: 20px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .reservation-table {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .reservation-table th, .reservation-table td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+       
+        <nav id="sidebar" class="col-md-2">
+            <ul>
+                <li>
+                    <div class="logo">
+                        <img src="{% static 'images/airlogo.png' %}" alt="logo">
+                    </div>
+                </li>
+                <br/><br/>
+                <li class="nav-item">
+                    <a>Dashboard</a>
+                </li>
+                <br/><br/>
+                <li class="nav-item">
+                    <a href="#">Flights</a>
+                </li>
+                <br/><br/>
+                <li class="nav-item">
+                    <a href="#">Planes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'class' %}">classes</a>
+                </li>  
+            </ul>
+        </nav>
+        <main class="col-md-9 px-md-5 ">
+            
+            <div class="">
+                <h1 class="h1">Airport Dashboard</h1>
+            </div>
+            <!-- Add these lines inside the main content (right after the welcome message) -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dashboard-card">
+                        <h3>Select Month and Year</h3>
+                        <form id="monthYearForm">
+                            <label for="selectedMonthYear" class="form-label">Month and Year:</label>
+                            <input type="month" id="selectedMonthYear" name="selectedMonthYear" class="form-control" required>
+                            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Card -->
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="dashboard-card" style="background-color:#FF6384">
+                        <h3>Total Flights</h3>
+                        <p class="display-5" style="font-weight:bold">25</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card" style="background-color:#FF407D; ">
+                        <h4>Total Passengers</h4>
+                        <p class="display-5" style="font-weight:bold">1200</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card" style="background-color:#FBA834;">
+                        <h4>Revenue</h4>
+                        <p class="display-5" style="font-weight:bold;">$50,000</p>
+                    </div>
+                </div>
+            </div>
+        
+            
+        
+            <!-- Charts -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dashboard-card">
+                        <h3>Monthly Revenue Chart</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="dashboard-card">
+                        <h3>Flights Distribution Chart</h3>
+                        <canvas id="flightsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Sample Chart Data
+    var revenueChartData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [{
+            label: 'Revenue',
+            data: [5000, 8000, 12000, 10000, 15000, 20000],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    var flightsChartData = {
+        labels: ["Domestic", "International"],
+        datasets: [{
+            data: [70, 30],
+            backgroundColor: ['#FF6384', '#36A2EB'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB']
+        }]
+    };
+
+    // Render Charts
+    var revenueChart = new Chart(document.getElementById("revenueChart"), {
+        type: 'bar',
+        data: revenueChartData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    var flightsChart = new Chart(document.getElementById("flightsChart"), {
+        type: 'doughnut',
+        data: flightsChartData
+    });
+
+    <script>
+        document.getElementById("monthYearForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            
+            var selectedMonthYear = document.getElementById("selectedMonthYear").value;
+    
+            // You can use the selectedMonthYear value as needed
+            console.log("Selected Month and Year:", selectedMonthYear);
+        });
+    </script>
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Invoice</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .invoice {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            background-color: #f9f9f9;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .invoice-total {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .payment-button {
+            display: block;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .print-button {
+            display: block;
+            margin-top: 10px;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div class="invoice">
+        <div class="invoice-header">
+            <h2>Reservation</h2>
+            <p>Date: {{ current_date }}</p>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Passenger Name</th>
+                    <th>Class</th>
+                    <th>Category</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.passenger_name }}</td>
+                        <td>{{ reservation.class }}</td>
+                        <td>{{ reservation.category }}</td>
+
+                        <td>${{ reservation.total_price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="invoice-total">
+            <p>Total Price: ${{ total_price }}</p>
+        </div>
+
+        <a href="#" class="payment-button">Make Payment</a>
+        
+        <a href="#" class="print-button" onclick="printInvoice()">Print</a>
+        
+
+    </div>
+    <script>
+        // Optional: You can include a JavaScript function to trigger print
+        function printInvoice() {
+            window.print();
+        }
+        
+        // Automatically trigger print when the page loads
+        window.onload = function() {
+            printInvoice();
+        };
+    </script>
+</body>
+</html>

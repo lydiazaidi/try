@@ -1,0 +1,79 @@
+/* static/css/list.css */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-fluid {
+    display: flex;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #031047;
+    color: white;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.logo img {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light gray color for header background */
+    border-bottom: 1px solid #dee2e6; /* Border color */
+}
+
+.action-buttons button {
+    margin-left: auto;
+}
+
+.content {
+    padding: 20px;
+}
+
+/* Responsive table styling */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa; /* Light gray color for header background */
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
